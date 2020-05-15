@@ -16,7 +16,8 @@ Created by Tim Ling @ YSL lab
 
 ## Reference
 
-	Rodriguez, A., and A. Laio. “Clustering by Fast Search and Find of Density Peaks.” Science, vol. 344, no. 6191, 2014, 		pp.1492–1496., doi:10.1126/science.1242072.
+	Rodriguez, A., and A. Laio. “Clustering by Fast Search and Find of Density Peaks.” Science, vol. 344, no. 6191, 2014,
+		pp.1492–1496., doi:10.1126/science.1242072.
 
 ## Protocol Description
 
