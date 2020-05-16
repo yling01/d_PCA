@@ -1,3 +1,10 @@
+
+'''
+This set of functions make Ramachandran plots for the top five clusters.
+The population of each cluster is printed next to the cluster Ramachandran
+plot and the three letter code of is printed above each box.
+The color bars is shared across all clusters.
+'''
 def MakeFigure(clusters, res, num_frames, NIP_ttl, NIP_clean, file_name):
     global dir_name
     file_name = dir_name + '/' +file_name
@@ -162,3 +169,11 @@ def genColorMap(cmap):
     cvals = [('white')] + [(cmap(i)) for i in range(1,256)] 
     new_map = colors.LinearSegmentedColormap.from_list('new_map',cvals, N=256)
     return new_map
+
+def calcDensity2D (Xs, Ys, Ws=None):
+    assert len(Xs) == len(Ys)
+    Bins = np.linspace(start=-180, stop=180, num=101)
+    density2D, xedges, yedges = np.histogram2d(Xs, Ys, bins=Bins, weights=Ws, density=True)
+    xmidps = 0.5 * (xedges[:-1] + xedges[1:])
+    ymidps = 0.5 * (yedges[:-1] + yedges[1:])
+    return xmidps, ymidps, density2D
