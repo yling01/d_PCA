@@ -1,4 +1,11 @@
 '''
+Tim Ling
+
+Last update: 2020.05.18
+'''
+
+import numpy as np
+'''
 Arguments: 
 
     s_pop: (np array (n dimension)) population histogram of analysis target

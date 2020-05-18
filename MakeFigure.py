@@ -1,3 +1,17 @@
+'''
+Tim Ling
+
+Last update: 2020.05.18
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+import colorsys
+from scipy.spatial import distance
+
+import matplotlib.font_manager as ftman
+import matplotlib.colors as colors
+import matplotlib.cm as cmx
+import matplotlib.colorbar as cb
 
 '''
 This set of functions make Ramachandran plots for the top five clusters.
@@ -5,8 +19,7 @@ The population of each cluster is printed next to the cluster Ramachandran
 plot and the three letter code of is printed above each box.
 The color bars is shared across all clusters.
 '''
-def MakeFigure(clusters, res, num_frames, NIP_ttl, NIP_clean, file_name):
-    global dir_name
+def MakeFigure(clusters, res, num_frames, NIP_ttl, NIP_clean, file_name, dir_name):
     file_name = dir_name + '/' +file_name
     TitleFP  = ftman.FontProperties(size=18)
     LegendFP = ftman.FontProperties(size=18)

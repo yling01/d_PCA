@@ -1,3 +1,8 @@
+'''
+Tim Ling
+
+Last update: 2020.05.18
+'''
 def ThreeToOne(three_letter_code):
     d = {'CYS': 'C', 'ASP': 'D', 'SER': 'S', 'GLN': 'Q', 'LYS': 'K',
      'ILE': 'I', 'PRO': 'P', 'THR': 'T', 'PHE': 'F', 'ASN': 'N', 

@@ -1,4 +1,12 @@
 '''
+Tim Ling
+
+Last update: 2020.05.18
+'''
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.cluster import DBSCAN
+'''
 Parameters:
 
     h: (np.array) histogram(h[0]) and edges(h[1])

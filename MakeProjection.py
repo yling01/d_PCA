@@ -1,4 +1,15 @@
 '''
+Tim Ling
+
+Last update: 2020.05.18
+'''
+import MDAnalysis as mda
+from MDAnalysis.analysis.dihedrals import Dihedral
+from MDAnalysis.lib.distances import calc_dihedrals
+
+import numpy as np
+from sklearn.decomposition import PCA
+'''
 Arguments: 
     
     u: (mda object) protein trajectory

@@ -1,4 +1,4 @@
-# ala_scan
+# Dihedral Pricipal Component Analysis
 Created by Tim Ling @ YSL lab
 
 ## Dependencies
@@ -20,8 +20,33 @@ Created by Tim Ling @ YSL lab
 		pp.1492–1496., doi:10.1126/science.1242072.
 
 ## Protocol Description
+	
+	This program implements the density peak clustering algorithm.
 
 ## Quickstart
+
+	There are two PDB trajectory files that can be used. The two trajectory files have only proteins with periodic boundary 
+	conditions (PBC) removed. (It has not been tested if the program works on systems with solvent or if the PBC is present.)
+	To run the program, simply do 
+
+				python dPCA.py --traj1 s1_GNSRV_test.pdb --traj2 s2_GNSRV_test.pdb
+
+	The program can also take the following flags:
+		
+		--components: (integer) if greater than 1, it indicates the number of components
+					  otherwise it indicates the percent variance explained.
+
+		--timer: (bool) True to time the analysis process.
+
+		--interactive: (bool) True to select the cluster centers interactively.
+
+		--debug: (bool) True to output useful information.
+
+## Known Issues:
+	
+* The time required to perform this analysis protocol increases significantly with more components.
+* The program takes a lot of memory (Solution might be to use sparse matrix from numpy).
+* When interactive mode is activated, the point with the highest rho has to be selected as the cluster center.
 
 ## Acknowledgments
 The implementation is based the previous work from (not ranked):

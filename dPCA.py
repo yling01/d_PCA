@@ -1,42 +1,22 @@
-#!/usr/bin/env python
-# coding: utf-8
+'''
+Tim Ling
 
-import MDAnalysis as mda
-from MDAnalysis.analysis.dihedrals import Dihedral
-from MDAnalysis.lib.distances import calc_dihedrals
-
-import numpy as np
-from sklearn.decomposition import PCA
-from sklearn.cluster import DBSCAN
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
-from sklearn.cluster import DBSCAN
-from scipy.spatial.distance import pdist
-import math
-import matplotlib.pyplot as plt
-from matplotlib.widgets import RectangleSelector
-import colorsys
-from scipy.spatial import distance
-
-import matplotlib.font_manager as ftman
-import matplotlib.colors as colors
-import matplotlib.cm as cmx
-import matplotlib.colorbar as cb
+Last update: 2020.05.18
+'''
 import optparse    
 import os
 import sys
 import matplotlib
 import time
 
-from MakeFigure.py import *
-from CalcNIP.py import *
-from Cluster.py import *
-from MakeDensityMtx.py import *
-from MakeProjection.py import *
-from Miscellaneous.py import * 
+from MakeFigure import *
+from CalcNIP import *
+from Cluster import *
+from MakeDensityMtx import *
+from MakeProjection import *
+from Miscellaneous import *
 
 matplotlib.use('TkAgg', warn=False)
-
 
 
 parser = optparse.OptionParser()
@@ -87,12 +67,22 @@ u2 = mda.Universe(traj2)
 
 res_name = list(u1.residues.resnames)
 
-global dir_name 
 dir_name = ''
 for res in res_name:
     dir_name += ThreeToOne(res)
 
-if not os.path.exists(dir_name):
+if os.path.exists(dir_name):
+    dir = os.listdir(dir_name) 
+  
+    # Checking if the list is empty or not 
+    if len(dir) != 0: 
+        signal = input("The analysis has been performed.\n" \
+            + "Enter 1 to cotinue and other keys to exit.\n" \
+            + "(!!!Note: Files Might Be Overwritten!!!)\n")
+        if int(signal) != 1:
+            sys.exit()
+
+else:
     os.makedirs(dir_name)
 
 u1_num_frame = len(u1.trajectory)
@@ -124,8 +114,8 @@ s1_density, s1_density_clean = combine_density_coor(h1, 0.1000)
 s2_density, s2_density_clean = combine_density_coor(h2, 0.1000)
 
 print("Performing cluster analysis...")
-projection_cluster_assignment1 = get_cluster_assignment(s1_density_clean, projection1, "s1_decision_graph.png", interactive)
-projection_cluster_assignment2 = get_cluster_assignment(s2_density_clean, projection2, "s2_decision_graph.png", interactive)
+projection_cluster_assignment1 = get_cluster_assignment(s1_density_clean, projection1, "s1_decision_graph.png", interactive, dir_name)
+projection_cluster_assignment2 = get_cluster_assignment(s2_density_clean, projection2, "s2_decision_graph.png", interactive, dir_name)
 
 clusters1, outliers1 = get_top_clusters(5, dihedral_angle1, projection_cluster_assignment1)
 clusters2, outliers2 = get_top_clusters(5, dihedral_angle2, projection_cluster_assignment2)
@@ -139,8 +129,8 @@ NIP_clean = calc_NIP(h1_clean, h2_clean)
 NIP_ttl = calc_NIP(h1, h2)
 
 print("Plotting...")
-MakeFigure(clusters1, res_name, u1_num_frame, NIP_ttl[0], NIP_clean[0], "s1_rama.png")
-MakeFigure(clusters2, res_name, u2_num_frame, NIP_ttl[1], NIP_clean[1], "s2_rama.png")
+MakeFigure(clusters1, res_name, u1_num_frame, NIP_ttl[0], NIP_clean[0], "s1_rama.png", dir_name)
+MakeFigure(clusters2, res_name, u2_num_frame, NIP_ttl[1], NIP_clean[1], "s2_rama.png", dir_name)
 plt.close('all')
 
 if time_procedure:
