@@ -28,6 +28,10 @@ parser.add_option('--traj2', dest = 'traj2',
     default = 'NO_INPUT',
     help = 'System 2 trajectory in PDB format')
 
+parser.add_option('--topology', dest='topology',
+    default = 'NO_INPUT',
+    help = 'Topology file in GRO format')
+
 parser.add_option('--components', dest = 'n',
     default = '3',
     help = 'integer if greater than 1, indicating the number of components\
@@ -48,8 +52,14 @@ parser.add_option('--debug', dest = 'debug',
 
 (options,args) = parser.parse_args()
 
-traj1 = options.traj1
-traj2 = options.traj2
+traj1 = options.traj1.split(",")
+traj2 = options.traj2.split(",")
+topology = options.topology
+assert len(traj1) == len(traj2)
+
+num_trajectories = len(traj1)
+
+
 n = float(options.n)
 time_procedure = bool(options.time_procedure)
 interactive = bool(options.interactive)
@@ -58,12 +68,12 @@ debug = bool(options.debug)
 if n >= 1:
     n = int(n)
 
-if 'NO_INPUT' in [traj1, traj2]:
-    sys.exit("Input trajectory not specified!\n")
+if 'NO_INPUT' in [traj1, traj2, topology]:
+    sys.exit("Input trajectory or topology not specified!\n")
 
 print("Reading trajectories...")
-u1 = mda.Universe(traj1)
-u2 = mda.Universe(traj2)
+u1 = mda.Universe(topology, traj1)
+u2 = mda.Universe(topology, traj2)
 
 res_name = list(u1.residues.resnames)
 
@@ -95,13 +105,11 @@ if time_procedure:
 
 
 print("Getting dihedrals...")
-dihedral_angle1 = calculate_phi_psi(u1)
-dihedral_angle2 = calculate_phi_psi(u2)
+dihedral_angle1 = calculate_phi_psi(u1, num_trajectories)
+dihedral_angle2 = calculate_phi_psi(u2, num_trajectories)
 trig_trr1 = convert_dihedral_to_trig(dihedral_angle1)
 trig_trr2 = convert_dihedral_to_trig(dihedral_angle2)
 trig_trr_ttl = np.vstack((trig_trr1, trig_trr2))
-u1_num_frame = len(u1.trajectory)
-u2_num_frame = len(u2.trajectory)
 
 
 print("Writing projection...")
