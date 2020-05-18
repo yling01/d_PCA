@@ -25,8 +25,9 @@ Created by Tim Ling @ YSL lab
 
 ## Quickstart
 
-	There are two PDB trajectory files that can be used. The two trajectory files have only proteins with periodic boundary 
-	conditions (PBC) removed. (It has not been tested if the program works on systems with solvent or if the PBC is present.)
+	There are two PDB trajectory files that can be used. (Provided upon request). 
+	The two trajectory files have only proteins with periodic boundary conditions (PBC) removed. 
+	(It has not been tested if the program works on systems with solvent or if the PBC is present.)
 	To run the program, simply do 
 
 				python dPCA.py --traj1 s1_GNSRV_test.pdb --traj2 s2_GNSRV_test.pdb
