@@ -28,7 +28,11 @@ parser.add_option('--traj2', dest = 'traj2',
     default = 'NO_INPUT',
     help = 'System 2 trajectory in PDB format')
 
-parser.add_option('--topology', dest='topology',
+parser.add_option('--topology1', dest='topology1',
+    default = 'NO_INPUT',
+    help = 'Topology file in GRO format')
+
+parser.add_option('--topology2', dest='topology2',
     default = 'NO_INPUT',
     help = 'Topology file in GRO format')
 
@@ -54,7 +58,8 @@ parser.add_option('--debug', dest = 'debug',
 
 traj1 = options.traj1.split(",")
 traj2 = options.traj2.split(",")
-topology = options.topology
+topology1 = options.topology1
+topology2 = options.topology2
 assert len(traj1) == len(traj2)
 
 num_trajectories = len(traj1)
@@ -72,8 +77,8 @@ if 'NO_INPUT' in [traj1, traj2, topology]:
     sys.exit("Input trajectory or topology not specified!\n")
 
 print("Reading trajectories...")
-u1 = mda.Universe(topology, traj1)
-u2 = mda.Universe(topology, traj2)
+u1 = mda.Universe(topology1, traj1)
+u2 = mda.Universe(topology2, traj2)
 
 res_name = list(u1.residues.resnames)
 
