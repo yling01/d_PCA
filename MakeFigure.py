@@ -28,8 +28,8 @@ def MakeFigure(clusters, res, num_frames, NIP_ttl, NIP_clean, file_name, dir_nam
     cluster_ttl = clusters[0]
     for cluster in clusters[1:]:
         cluster_ttl = np.vstack((cluster_ttl, cluster))
-    phi = cluster_ttl[:, range(0, num_res * 2, 2)]
-    psi = cluster_ttl[:, range(1, num_res * 2, 2)]
+    phi = cluster_ttl[:, :num_res]
+    psi = cluster_ttl[:, num_res:]
     max_density = -1
     for i in range(num_res):
         phi_i = phi[:,i]

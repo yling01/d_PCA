@@ -9,6 +9,7 @@ from MDAnalysis.lib.distances import calc_dihedrals
 
 import numpy as np
 from sklearn.decomposition import PCA
+import os
 
 def ThreeToOne(three_letter_code):
     d = {'CYS': 'C', 'ASP': 'D', 'SER': 'S', 'GLN': 'Q', 'LYS': 'K',
@@ -54,6 +55,7 @@ def calculate_phi_psi(u, start, stop):
     last_psi = Dihedral([last_psi_group]).run(start=start, stop=stop)
     phi = np.hstack((first_phi.angles, R_phi.angles))
     psi = np.hstack((R_psi.angles, last_psi.angles))
+
     dihedral_angle = np.hstack((phi, psi))
     return dihedral_angle
 

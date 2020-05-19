@@ -105,6 +105,8 @@ if time_procedure:
 
 print("Getting dihedrals...")
 dihedral_angle1 = calculate_phi_psi_system(traj1_xtc, topology1)
+# np.savetxt("dihedral.txt", dihedral_angle1, fmt="%10.5f")
+# sys.exit()
 dihedral_angle2 = calculate_phi_psi_system(traj2_xtc, topology2)
 
 u1_num_frame = len(dihedral_angle1)
