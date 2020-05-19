@@ -22,11 +22,11 @@ matplotlib.use('TkAgg', warn=False)
 parser = optparse.OptionParser()
 parser.add_option('--traj1', dest = 'traj1',
     default = 'NO_INPUT',   
-    help = 'System 1 trajectory in PDB format')
+    help = 'System 1 trajectory in XTC format')
 
 parser.add_option('--traj2', dest = 'traj2',
     default = 'NO_INPUT',
-    help = 'System 2 trajectory in PDB format')
+    help = 'System 2 trajectory in XTC format')
 
 parser.add_option('--topology1', dest='topology1',
     default = 'NO_INPUT',
@@ -56,14 +56,8 @@ parser.add_option('--debug', dest = 'debug',
 
 (options,args) = parser.parse_args()
 
-traj1 = options.traj1.split(",")
-traj2 = options.traj2.split(",")
-topology1 = options.topology1
-topology2 = options.topology2
-assert len(traj1) == len(traj2)
-
-num_trajectories = len(traj1)
-
+traj1 = options.traj1
+traj2 = options.traj2
 
 n = float(options.n)
 time_procedure = bool(options.time_procedure)
@@ -73,14 +67,20 @@ debug = bool(options.debug)
 if n >= 1:
     n = int(n)
 
-if 'NO_INPUT' in [traj1, traj2, topology]:
+topology1, traj1_xtc = get_trajectory_files(traj1)
+topology2, traj2_xtc = get_trajectory_files(traj2)
+
+assert len(traj1_xtc) == len(traj2_xtc)
+
+if 'NO_INPUT' in [topology1, topology2]:
     sys.exit("Input trajectory or topology not specified!\n")
 
-print("Reading trajectories...")
-u1 = mda.Universe(topology1, traj1)
-u2 = mda.Universe(topology2, traj2)
+num_trajectories = len(traj1_xtc)
 
-res_name = list(u1.residues.resnames)
+traj1_xtc.sort()
+traj2_xtc.sort()
+
+res_name = get_residue_name(topology1)
 
 dir_name = ''
 for res in res_name:
@@ -96,26 +96,24 @@ if os.path.exists(dir_name):
             + "(!!!Note: Files Might Be Overwritten!!!)\n")
         if int(signal) != 1:
             sys.exit()
-
 else:
     os.makedirs(dir_name)
-
-u1_num_frame = len(u1.trajectory)
-u2_num_frame = len(u2.trajectory)
-
-assert u1_num_frame == u2_num_frame
 
 if time_procedure:
     start = time.perf_counter()
 
 
 print("Getting dihedrals...")
-dihedral_angle1 = calculate_phi_psi(u1, num_trajectories)
-dihedral_angle2 = calculate_phi_psi(u2, num_trajectories)
+dihedral_angle1 = calculate_phi_psi_system(traj1_xtc, topology1)
+dihedral_angle2 = calculate_phi_psi_system(traj2_xtc, topology2)
+
+u1_num_frame = len(dihedral_angle1)
+u2_num_frame = len(dihedral_angle2)
+assert u1_num_frame == u2_num_frame
+
 trig_trr1 = convert_dihedral_to_trig(dihedral_angle1)
 trig_trr2 = convert_dihedral_to_trig(dihedral_angle2)
 trig_trr_ttl = np.vstack((trig_trr1, trig_trr2))
-
 
 print("Writing projection...")
 projection, pca = dimension_reduction(trig_trr_ttl, n)
