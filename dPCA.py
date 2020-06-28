@@ -3,7 +3,7 @@ Tim Ling
 
 Last update: 2020.05.18
 '''
-import optparse    
+import optparse
 import os
 import sys
 import matplotlib
@@ -16,12 +16,13 @@ from MakeDensityMtx import *
 from MakeProjection import *
 from Miscellaneous import *
 
+sys.path.insert(1, 'source/')
 matplotlib.use('TkAgg', warn=False)
 
 
 parser = optparse.OptionParser()
 parser.add_option('--traj1', dest = 'traj1',
-    default = 'NO_INPUT',   
+    default = 'NO_INPUT',
     help = 'System 1 trajectory in XTC format')
 
 parser.add_option('--traj2', dest = 'traj2',
@@ -49,7 +50,7 @@ parser.add_option('--interactive', dest = 'interactive',
     default = 0,
     help = 'True to select cluster centers')
 
-parser.add_option('--debug', dest = 'debug', 
+parser.add_option('--debug', dest = 'debug',
     default = 0,
     help = 'True to print out useful information')
 
@@ -87,10 +88,10 @@ for res in res_name:
     dir_name += ThreeToOne(res)
 
 if os.path.exists(dir_name):
-    dir = os.listdir(dir_name) 
-  
-    # Checking if the list is empty or not 
-    if len(dir) != 0: 
+    dir = os.listdir(dir_name)
+
+    # Checking if the list is empty or not
+    if len(dir) != 0:
         signal = input("The analysis has been performed.\n" \
             + "Enter 1 to cotinue and other keys to exit.\n" \
             + "(!!!Note: Files Might Be Overwritten!!!)\n")
@@ -105,8 +106,6 @@ if time_procedure:
 
 print("Getting dihedrals...")
 dihedral_angle1 = calculate_phi_psi_system(traj1_xtc, topology1)
-# np.savetxt("dihedral.txt", dihedral_angle1, fmt="%10.5f")
-# sys.exit()
 dihedral_angle2 = calculate_phi_psi_system(traj2_xtc, topology2)
 
 u1_num_frame = len(dihedral_angle1)
@@ -152,7 +151,7 @@ if time_procedure:
     print(f"This analysis procedure finishes in {end - start:0.4f} seconds")
 
 if debug:
-    covar = pca.get_covariance() 
+    covar = pca.get_covariance()
     np.savetxt("covar.dat", covar, fmt="%10.6f")
     np.savetxt("dihedral.trr", trig_trr_ttl, fmt="%10.6f")
     np.savetxt("projection.txt", projection, fmt="%10.6f")
@@ -171,8 +170,6 @@ if debug:
     np.savetxt("s2_distance.dmtx", s2_distance_mtx, fmt="%10.5f")
 
     np.savetxt("cluster.txt", np.hstack((np.arange(1, len(projection1) + 1).reshape((-1,1)), projection1, projection_cluster_assignment.reshape((-1,1)))), fmt="%5d%10.5f%10.5f%10.5f%5d")
-
-
 
 
 
