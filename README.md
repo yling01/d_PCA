@@ -24,13 +24,12 @@ Created by Tim Ling @ YSL lab
 	This program implements the density peak clustering algorithm.
 
 ## Quickstart
+	
+	To run the program properly, ensure that there are xtc files and a topology file in 
+	the structure directories.
+	To run the program, simply do (XTC1_dir and XTC2_dir can be provided upon request):
 
-	There are two PDB trajectory files that can be used. (Provided upon request). 
-	The two trajectory files have only proteins with periodic boundary conditions (PBC) removed. 
-	(It has not been tested if the program works on systems with solvent or if the PBC is present.)
-	To run the program, simply do 
-
-				python dPCA.py --traj1 s1_GNSRV_test.pdb --traj2 s2_GNSRV_test.pdb
+				python dPCA.py --traj1 XTC1_dir/ --traj2 XTC2_dir/
 
 	The program can also take the following flags:
 		
@@ -55,6 +54,7 @@ The implementation is based the previous work from (not ranked):
 * Dr. He (Agnes) Huang
 * Dr. Jiayuan Miao
 * Dr. Hongtao Yu
+* Jovan Damjanovic
 
 
 
