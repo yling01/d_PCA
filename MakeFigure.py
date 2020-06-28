@@ -51,8 +51,8 @@ def MakeFigure(clusters, res, num_frames, NIP_ttl, NIP_clean, file_name, dir_nam
         num_frame_cluster = len(np.array([cluster]).flatten()) / (2 * num_res)
         population = num_frame_cluster / num_frames
         population = str(round(population * 100, 3)) + "%"
-        phi = cluster[:, range(0, num_res * 2, 2)]
-        psi = cluster[:, range(1, num_res * 2, 2)]
+        phi = cluster[:, :num_res]
+        psi = cluster[:, num_res:]
         y0 = top - index * (SubPlotH + HSpace)
         for ires in range(num_res):
             xtlv = False
