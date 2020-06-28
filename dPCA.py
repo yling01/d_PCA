@@ -9,6 +9,7 @@ import sys
 import matplotlib
 import time
 
+sys.path.insert(1, 'source/')
 from MakeFigure import *
 from CalcNIP import *
 from Cluster import *
@@ -16,7 +17,6 @@ from MakeDensityMtx import *
 from MakeProjection import *
 from Miscellaneous import *
 
-sys.path.insert(1, 'source/')
 matplotlib.use('TkAgg', warn=False)
 
 

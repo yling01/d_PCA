@@ -19,7 +19,6 @@ def filter_file(source, sequence_length):
                     continue
                 else:
                     files_to_copy.append("/".join([source, file]))
-                    print("here")
                     has_gro = True
             elif file[-3:] == "xtc":
                 files_to_copy.append("/".join([source, file]))
@@ -27,7 +26,7 @@ def filter_file(source, sequence_length):
 
 if __name__ == "__main__":
 
-    print("NOTE: The program assumes that the number of neutral replicas is 5.")
+    print("\nNOTE: The program assumes that the number of neutral replicas is 5.")
     print("The file format of trajectory should be .xtc and topology should be .gro.\n")
     curr_path = os.getcwd()
 
@@ -43,6 +42,10 @@ if __name__ == "__main__":
     files_to_copy = filter_file(source_path_s2, sequence_length)
     copy_file(files_to_copy, (curr_path + "/trajectory/s2"))
 
-
-
-
+    while True:
+        cluster = input("Enter 1 for submission on cluster, 0 otherwise")
+        if cluster == "0":
+            os.system("python dPCA.py --traj1 trajectory/s1 --traj2 trajectory/s2")
+            break
+        elif cluster == "1":
+            os.system("sbatch submit.job")

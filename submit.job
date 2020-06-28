@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH -p mpi
+#SBATCH --qos=normal
+#SBATCH --account=normal
+#SBATCH -J dPCA
+#SBATCH -o runout.%j
+#SBATCH -e runerr.%j
+#SBATCH --export=ALL
+#SBATCH --time=07-00:00
+python dPCA.py --traj1 trajectory/s1 --traj2 trajectory/s2
