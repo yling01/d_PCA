@@ -56,7 +56,6 @@ Created by Tim Ling @ YSL lab
 ![This is the Ramachandron plot of populations clustered using this algorithm](https://github.com/yling01/d_PCA/blob/master/images/s1_rama.png)
 
 ## Acknowledgments
-The implementation is based the previous work from (not ranked):
 * Dr. Diana Slough
 * Dr. He (Agnes) Huang
 * Dr. Jiayuan Miao
