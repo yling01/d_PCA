@@ -53,7 +53,7 @@ Created by Tim Ling @ YSL lab
 ![This is how a decision graph will look like](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
 
 ### Ramachandron Plot of Clustered Population
-![This is the Ramachandron plot of populations clustered using this algorithm](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
+![This is the Ramachandron plot of populations clustered using this algorithm](https://github.com/yling01/d_PCA/blob/master/images/s1_rama.png)
 
 ## Acknowledgments
 The implementation is based the previous work from (not ranked):
