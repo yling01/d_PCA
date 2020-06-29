@@ -49,8 +49,10 @@ Created by Tim Ling @ YSL lab
 * When interactive mode is activated, the point with the highest rho has to be selected as the cluster center.
 
 ## Examples:
-###Decision Trees
+### Decision Graph
 ![This is how a decision graph will look like](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
+
+### Ramachandron Plot of Clustered Population
 ![This is the Ramachandron plot of populations clustered using this algorithm](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
 
 ## Acknowledgments
