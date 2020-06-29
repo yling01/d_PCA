@@ -50,7 +50,8 @@ Created by Tim Ling @ YSL lab
 
 ## Examples:
 ###Decision Trees
-![here](https://github.com/yling01/d_PCA/tree/master/images)
+![This is how a decision graph will look like](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
+![This is the Ramachandron plot of populations clustered using this algorithm](https://github.com/yling01/d_PCA/blob/master/images/s1_decision_graph.png)
 
 ## Acknowledgments
 The implementation is based the previous work from (not ranked):
