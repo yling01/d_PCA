@@ -147,7 +147,7 @@ def AxesPropWrapper(Axes,XTicks=None,YTicks=None,MXTicks=None,MYTicks=None,
     Axes.set_xlim(left=left,right=right)
     Axes.set_ylim(bottom=bot,top=top)
 
-def MakeSubPlot(Axes, XVals, YVals, ColVals, ires, XTLVisible=False, YTLVisible=False, max_density=1):
+def MakeSubPlot(Axes, XVals, YVals, ColVals, ires, XTLVisible=False, YTLVisible=False, max_normed=1):
 
     TickFP  = ftman.FontProperties(size=12)
     MTickFP = ftman.FontProperties(size=0)
@@ -186,7 +186,7 @@ def genColorMap(cmap):
 def calcDensity2D (Xs, Ys, Ws=None):
     assert len(Xs) == len(Ys)
     Bins = np.linspace(start=-180, stop=180, num=101)
-    density2D, xedges, yedges = np.histogram2d(Xs, Ys, bins=Bins, weights=Ws, density=True)
+    density2D, xedges, yedges = np.histogram2d(Xs, Ys, bins=Bins, weights=Ws, normed=True)
     xmidps = 0.5 * (xedges[:-1] + xedges[1:])
     ymidps = 0.5 * (yedges[:-1] + yedges[1:])
     return xmidps, ymidps, density2D

@@ -74,12 +74,12 @@ def create_histogram(projection1, projection2, BINS = 50):
     BINS = 50
     projection_reference = np.vstack((projection1, projection2))
     
-    ref_h = np.histogramdd(projection_reference, bins=BINS, density=True)
+    ref_h = np.histogramdd(projection_reference, bins=BINS, normed=True)
     
     BINS_array = ref_h[1]
     
-    s1_h = np.histogramdd(projection1, bins=BINS_array, density=True)
-    s2_h = np.histogramdd(projection2, bins=BINS_array, density=True)
+    s1_h = np.histogramdd(projection1, bins=BINS_array, normed=True)
+    s2_h = np.histogramdd(projection2, bins=BINS_array, normed=True)
     
     return s1_h, s2_h
 
