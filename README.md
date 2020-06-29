@@ -48,6 +48,10 @@ Created by Tim Ling @ YSL lab
 * The program takes a lot of memory (Solution might be to use sparse matrix from numpy).
 * When interactive mode is activated, the point with the highest rho has to be selected as the cluster center.
 
+## Examples:
+###Decision Trees
+![here](https://github.com/yling01/d_PCA/tree/master/images)
+
 ## Acknowledgments
 The implementation is based the previous work from (not ranked):
 * Dr. Diana Slough
